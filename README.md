@@ -1,8 +1,12 @@
-### Hotel task ###
+# Hotel task #
 
 [Макет базы данных](https://github.com/EugeneKroshinsky/hotel-task/blob/main/diagrams/database-diagram.png)
 
-Задание:
+[План выполнения](#plan)
+
+
+
+### Задание ###
 Необходимо разработать RESTful API приложение для работы с отелями со следующими методами:
 
 - GET /hotels - получение списка всех отелей с их краткой информацией
@@ -22,4 +26,15 @@ Maven, Java 17+, Spring Boot, Spring JPA, Liquibase
 
 В качестве базы данных:
 H2
+
+<a id="plan"></a>
+### План выполнения: ###
+1) Создание макета базы данных для сущностей:
+    - hotel
+    - address
+    - contact
+    - arrival_time
+    - amenity
+2) Создание моделей для этих сущностей (Entities)
+3) Подключение Liquibase, создание миграций для создания сущностей и заполнения их данными.
 

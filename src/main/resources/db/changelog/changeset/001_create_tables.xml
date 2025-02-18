@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="Eugene Kroshinsky">
+        <createTable tableName="hotels">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="description" type="TEXT"/>
+            <column name="brand" type="VARCHAR(255)"/>
+
+            <column name="address_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contacts_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="arrival_time_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="Eugene Kroshinsky">
+        <createTable tableName="address">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="house_number" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="street" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="county" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="post_code" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="Eugene Kroshinsky">
+        <createTable tableName="contacts">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="Eugene Kroshinsky">
+        <createTable tableName="arrival_time">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="check_in" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="check_out" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="5" author="Eugene Kroshinsky">
+        <createTable tableName="amenities">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"  unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="6" author="Eugene Kroshinsky">
+        <createTable tableName="hotel_amenities">
+            <column name="hotel_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amenity_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="7" author="Eugene Kroshinsky">
+        <addForeignKeyConstraint baseTableName="hotels" baseColumnNames="address_id"
+                                 referencedTableName="address" referencedColumnNames="id"
+                                 constraintName="fk_hotel_address"/>
+        <addForeignKeyConstraint baseTableName="hotels" baseColumnNames="contacts_id"
+                                 referencedTableName="contacts" referencedColumnNames="id"
+                                 constraintName="fk_hotel_contacts"/>
+        <addForeignKeyConstraint baseTableName="hotels" baseColumnNames="arrival_time_id"
+                                 referencedTableName="arrival_time" referencedColumnNames="id"
+                                 constraintName="fk_hotel_arrival_time"/>
+        <addForeignKeyConstraint baseTableName="hotel_amenities" baseColumnNames="hotel_id"
+                                 referencedTableName="hotels" referencedColumnNames="id"
+                                 constraintName="fk_hotel_amenities_hotel"/>
+        <addForeignKeyConstraint baseTableName="hotel_amenities" baseColumnNames="amenity_id"
+                                 referencedTableName="amenities" referencedColumnNames="id"
+                                 constraintName="fk_hotel_amenities_amenity"/>
+    </changeSet>
+
+</databaseChangeLog>
