@@ -19,3 +19,5 @@ Maven, Java 17+, Spring Boot, Spring JPA, Liquibase
 
 В качестве базы данных:
 H2
+
+[Макет базы данных](https://github.com/EugeneKroshinsky/hotel-task/diagrams/database-diagram.pdf)
