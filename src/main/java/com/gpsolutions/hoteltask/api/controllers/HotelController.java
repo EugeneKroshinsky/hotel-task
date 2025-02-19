@@ -4,11 +4,14 @@ import com.gpsolutions.hoteltask.api.dto.HotelCreateDtoRequest;
 import com.gpsolutions.hoteltask.api.dto.HotelDetailsDtoResponse;
 import com.gpsolutions.hoteltask.api.dto.HotelDtoResponse;
 import com.gpsolutions.hoteltask.service.HotelService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.Binding;
 import java.util.List;
 
 @RestController
@@ -32,7 +35,11 @@ public class HotelController {
     }
 
     @PostMapping
-    public ResponseEntity<HotelDtoResponse> createHotel(@RequestBody HotelCreateDtoRequest request) {
+    public ResponseEntity<HotelDtoResponse> createHotel(@RequestBody @Valid HotelCreateDtoRequest request,
+                                                        BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new RuntimeException(); //TODO: реализовать кастомное исключение
+        }
         HotelDtoResponse response = hotelService.createHotel(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
