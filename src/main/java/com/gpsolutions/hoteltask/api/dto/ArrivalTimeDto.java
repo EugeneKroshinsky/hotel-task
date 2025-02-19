@@ -10,4 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ArrivalTimeDto {
+    private String checkIn;
+    private String checkOut;
 }
