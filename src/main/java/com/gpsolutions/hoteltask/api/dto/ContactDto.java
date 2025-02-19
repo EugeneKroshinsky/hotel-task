@@ -9,10 +9,5 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class HotelDtoResponse {
-    private Long id;
-    private String name;
-    private String description;
-    private String address;
-    private String phone;
+public class ContactDto {
 }
