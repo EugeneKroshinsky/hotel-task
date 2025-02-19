@@ -35,9 +35,9 @@ H2
     - contact
     - arrival_time
     - amenity
-2) Создание моделей для этих сущностей (Entities) 
-3) Подключение Liquibase, создание миграций для создания сущностей и заполнения их данными.
-4) Создание контроллеров:
+2) Создание моделей для этих сущностей (Entities) [feature/entities-creation](https://github.com/EugeneKroshinsky/hotel-task/tree/feature/entities-creation)
+3) Подключение Liquibase, создание миграций для создания сущностей и заполнения их данными. [feature/adding-liquibase](https://github.com/EugeneKroshinsky/hotel-task/tree/feature/adding-liquibase)
+4) Создание контроллеров: [feature/controller-creation](https://github.com/EugeneKroshinsky/hotel-task/tree/feature/controller-creation)
    - HotelController
      - GET /property-view/hotels
      - GET /property-view/hotels/{id}
@@ -60,6 +60,6 @@ H2
    - HotelCreateDtoRequest
    - HotelDetailsDtoResponse
    - HotelDtoResponse
-5) Реализация DTO
-6) Создание классов Repository
+5) Реализация DTO [feature/dto-implementation]()
+6) Создание классов Repository [feature/repository-creation]()
 
