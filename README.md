@@ -35,6 +35,31 @@ H2
     - contact
     - arrival_time
     - amenity
-2) Создание моделей для этих сущностей (Entities)
+2) Создание моделей для этих сущностей (Entities) 
 3) Подключение Liquibase, создание миграций для создания сущностей и заполнения их данными.
+4) Создание контроллеров:
+   - HotelController
+     - GET /property-view/hotels
+     - GET /property-view/hotels/{id}
+     - POST /property-view/hotels
+     - POST /property-view/hotels/{id}/amenities
+   - SearchController
+     - GET /property-view/search
+   - HistogramController
+     - GET /property-view/histogram/{param}
+     
+   Создание сервиса HotelService с методами:
+   - getAllHotels()
+   - getHotelById(Long id) 
+   - addAmenities(Long id, List<String> amenities)
+   - createHotel(HotelCreateDtoRequest hotelCreateDtoRequest)
+   - getHistogram(String param)
+   - search(Map<String, String> params)
+   
+   Создание DTO:
+   - HotelCreateDtoRequest
+   - HotelDetailsDtoResponse
+   - HotelDtoResponse
+5) Реализация DTO
+6) Создание классов Repository
 
