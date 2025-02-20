@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 @Setter
 @Getter
@@ -24,4 +25,13 @@ public class Amenity {
 
     @ManyToMany(mappedBy = "amenities")
     private List<Hotel> hotels;
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Amenity.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("name='" + name + "'")
+                .add("hotels=" + hotels)
+                .toString();
+    }
 }

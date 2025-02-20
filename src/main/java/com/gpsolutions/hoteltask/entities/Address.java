@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.StringJoiner;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "housenumber", nullable = false)
+    @Column(name = "house_number", nullable = false)
     private String houseNumber;
 
     @Column(nullable = false)
@@ -27,8 +29,20 @@ public class Address {
     private String city;
 
     @Column(nullable = false)
-    private String county;
+    private String country;
 
     @Column(nullable = false)
     private String postCode;
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Address.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("houseNumber='" + houseNumber + "'")
+                .add("street='" + street + "'")
+                .add("city='" + city + "'")
+                .add("country='" + country + "'")
+                .add("postCode='" + postCode + "'")
+                .toString();
+    }
 }

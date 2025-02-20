@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.StringJoiner;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -22,4 +24,13 @@ public class ArrivalTime {
 
     @Column(name = "check_out", nullable = false)
     private String checkOut;
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", ArrivalTime.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("checkIn='" + checkIn + "'")
+                .add("checkOut='" + checkOut + "'")
+                .toString();
+    }
 }

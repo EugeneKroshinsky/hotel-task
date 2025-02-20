@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.StringJoiner;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -23,4 +25,13 @@ public class Contact {
 
     @Column(nullable = false)
     private String email;
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Contact.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("phone='" + phone + "'")
+                .add("email='" + email + "'")
+                .toString();
+    }
 }

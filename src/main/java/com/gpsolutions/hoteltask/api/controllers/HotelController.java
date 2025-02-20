@@ -5,15 +5,16 @@ import com.gpsolutions.hoteltask.api.dto.HotelDetailsDtoResponse;
 import com.gpsolutions.hoteltask.api.dto.HotelDtoResponse;
 import com.gpsolutions.hoteltask.service.HotelService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.Binding;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/property-view/hotels")
 public class HotelController {
@@ -38,6 +39,7 @@ public class HotelController {
     public ResponseEntity<HotelDtoResponse> createHotel(@RequestBody @Valid HotelCreateDtoRequest request,
                                                         BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            log.error("HotelCreateDtoRequest is not valid");
             throw new RuntimeException(); //TODO: реализовать кастомное исключение
         }
         HotelDtoResponse response = hotelService.createHotel(request);

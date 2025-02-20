@@ -1,13 +1,10 @@
 package com.gpsolutions.hoteltask.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+import java.util.StringJoiner;
 
 @Setter
 @Getter
@@ -47,5 +44,19 @@ public class Hotel {
             joinColumns = @JoinColumn(name = "hotel_id"),
             inverseJoinColumns = @JoinColumn(name = "amenity_id")
     )
-    private Set<Amenity> amenities = new HashSet<>();
+    private List<Amenity> amenities;
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Hotel.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("name='" + name + "'")
+                .add("description='" + description + "'")
+                .add("brand='" + brand + "'")
+                .add("address=" + address)
+                .add("contacts=" + contacts)
+                .add("arrivalTime=" + arrivalTime)
+                .add("amenities=" + amenities)
+                .toString();
+    }
 }

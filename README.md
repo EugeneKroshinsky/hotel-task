@@ -61,5 +61,5 @@ H2
    - HotelDetailsDtoResponse
    - HotelDtoResponse
 5) Реализация DTO [feature/dto-implementation]()
-6) Создание классов Repository [feature/repository-creation]()
+6) Создание класс Repository [feature/repository-creation]()
 

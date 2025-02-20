@@ -10,14 +10,14 @@
             <column name="house_number" value="9"/>
             <column name="street" value="Pobediteley Avenue"/>
             <column name="city" value="Minsk"/>
-            <column name="county" value="Belarus"/>
+            <column name="country" value="Belarus"/>
             <column name="post_code" value="220004"/>
         </insert>
         <insert tableName="address">
             <column name="house_number" value="25"/>
             <column name="street" value="Tverskaya Street"/>
             <column name="city" value="Moscow"/>
-            <column name="county" value="Russia"/>
+            <column name="country" value="Russia"/>
             <column name="post_code" value="125009"/>
         </insert>
     </changeSet>
@@ -78,9 +78,6 @@
         </insert>
         <insert tableName="amenities">
             <column name="name" value="Room service"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="name" value="Meeting rooms"/>
         </insert>
     </changeSet>
 
