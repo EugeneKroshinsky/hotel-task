@@ -1,5 +1,6 @@
 package com.gpsolutions.hoteltask.config;
 
+import com.gpsolutions.hoteltask.api.dto.HotelCreateDtoRequest;
 import com.gpsolutions.hoteltask.api.dto.HotelDetailsDtoResponse;
 import com.gpsolutions.hoteltask.api.dto.HotelDtoResponse;
 import com.gpsolutions.hoteltask.entities.Address;
@@ -18,8 +19,28 @@ public class ModelMapperConfig {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         addHotelAddressMapping(modelMapper);
-        addHotelAmenityMapping(modelMapper);
+        addHotelAmenityToStringMapping(modelMapper);
+        addStringToAmenityMapping(modelMapper);
+        addListStringToAmenityMapping(modelMapper);
         return modelMapper;
+    }
+
+    private void addStringToAmenityMapping(ModelMapper modelMapper) {
+        modelMapper.typeMap(String.class, Amenity.class)
+                .addMappings(mapper -> mapper.map(str -> str, Amenity::setName));
+
+    }
+
+    private void addListStringToAmenityMapping(ModelMapper modelMapper) {
+        modelMapper.typeMap(HotelCreateDtoRequest.class, Hotel.class)
+                .addMappings(mapper -> mapper.using(createStringListConverter(modelMapper))
+                        .map(HotelCreateDtoRequest::getAmenities, Hotel::setAmenities));
+    }
+
+    private Converter<List<String>, List<Amenity>> createStringListConverter(ModelMapper modelMapper) {
+        return ctx -> ctx.getSource().stream()
+                .map(str -> modelMapper.map(str, Amenity.class))
+                .toList();
     }
 
     private void addHotelAddressMapping(ModelMapper modelMapper) {
@@ -40,13 +61,14 @@ public class ModelMapperConfig {
         };
     }
 
-    private void addHotelAmenityMapping(ModelMapper modelMapper) {
+    private void addHotelAmenityToStringMapping(ModelMapper modelMapper) {
         modelMapper.typeMap(Hotel.class, HotelDetailsDtoResponse.class)
                 .addMappings(mapper ->
-                        mapper.using(createAmenitiesConverter())
+                        mapper.using(createStringsFromAmenitiesConverter())
                                 .map(Hotel::getAmenities, HotelDetailsDtoResponse::setAmenities));
     }
-    private Converter<List<Amenity>, List<String>> createAmenitiesConverter() {
+
+    private Converter<List<Amenity>, List<String>> createStringsFromAmenitiesConverter() {
         return ctx -> ctx.getSource().stream()
                 .map(Amenity::getName)
                 .toList();

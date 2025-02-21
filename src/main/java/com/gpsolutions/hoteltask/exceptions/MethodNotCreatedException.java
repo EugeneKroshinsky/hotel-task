@@ -6,12 +6,4 @@ public class MethodNotCreatedException extends RuntimeException {
         super(message);
     }
 
-
-    public MethodNotCreatedException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public MethodNotCreatedException(Throwable cause) {
-        super(cause);
-    }
 }

@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 import java.util.StringJoiner;
 
 @Setter
@@ -23,15 +21,13 @@ public class Amenity {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "amenities")
-    private List<Hotel> hotels;
+
 
     @Override
     public String toString() {
         return new StringJoiner(", ", Amenity.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("name='" + name + "'")
-                .add("hotels=" + hotels)
                 .toString();
     }
 }

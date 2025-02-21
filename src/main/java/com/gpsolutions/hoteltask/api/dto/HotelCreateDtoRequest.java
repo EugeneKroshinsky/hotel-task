@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -25,4 +27,6 @@ public class HotelCreateDtoRequest {
 
     @NotNull(message = "arrivalTime dto must be not null")
     private ArrivalTimeDto arrivalTime;
+
+    private List<String> amenities;
 }
