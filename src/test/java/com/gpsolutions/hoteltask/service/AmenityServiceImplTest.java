@@ -94,7 +94,6 @@ class AmenityServiceImplTest {
 
     @Test
     void addAmenitiesToHotelNullList() {
-
         amenities.add(amenity1);
         hotel.setAmenities(amenities);
         Hotel updatedHotel = amenityService.addAmenitiesToHotel(hotel, stringAmenities);
