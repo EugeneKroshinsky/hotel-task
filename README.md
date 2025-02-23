@@ -4,7 +4,7 @@
 
 [План выполнения](#plan)
 
-[Инструкции к запуску](#instructions)
+[Инструкции по запуску](#instructions)
 
 
 
@@ -62,13 +62,13 @@ H2
    - HotelCreateDtoRequest
    - HotelDetailsDtoResponse
    - HotelDtoResponse
-5) Реализация DTO [feature/dto-implementation]()
+5) Реализация DTO [feature/dto-implementation](https://github.com/EugeneKroshinsky/hotel-task/tree/feature/dto-implementation)
    - Добавление ModelMapper
    - Добавление Hibernate Validation
-6) Создание классов Repository [feature/repository-creation]()
+6) Создание классов Repository [feature/repository-creation](https://github.com/EugeneKroshinsky/hotel-task/tree/feature/repository-creation)
 7) Обработка всех исключений
    - Создание класса @RestControllerAdvice
-8) Тестирование
+8) Тестирование  [feature/tests](https://github.com/EugeneKroshinsky/hotel-task/tree/feature/tests)
    - Модульное тестирование сервисов
    - Модульное тестирование контроллеров
    - Модульное тестирование репозиториев

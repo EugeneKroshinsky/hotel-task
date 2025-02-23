@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleIllegalParameter(InvalidFilterParameterException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         problemDetail.setTitle("InvalidFilterParameterException");
-            problemDetail.setDetail(ex.getMessage());
+        problemDetail.setDetail(ex.getMessage());
         return problemDetail;
     }
 

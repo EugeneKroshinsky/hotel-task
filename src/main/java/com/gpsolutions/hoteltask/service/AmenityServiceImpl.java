@@ -22,6 +22,7 @@ public class AmenityServiceImpl implements AmenityService{
         this.modelMapper = modelMapper;
     }
 
+    @Override
     public Hotel addAmenitiesToHotel(Hotel hotel, List<String> amenities) {
         Set<String> currentAmenities = hotel.getAmenities()
                 .stream()
@@ -37,6 +38,7 @@ public class AmenityServiceImpl implements AmenityService{
         return hotel;
     }
 
+    @Override
     public Amenity findOrCreateAmenity(Amenity amenity) {
         return amenityRepository.findByName(amenity.getName())
                 .orElseGet(() -> amenityRepository.save(amenity));
