@@ -7,7 +7,6 @@ import com.gpsolutions.hoteltask.entities.Amenity;
 import com.gpsolutions.hoteltask.entities.Hotel;
 import com.gpsolutions.hoteltask.exceptions.HotelCreationException;
 import com.gpsolutions.hoteltask.exceptions.HotelNotFoundException;
-import com.gpsolutions.hoteltask.repository.AmenityRepository;
 import com.gpsolutions.hoteltask.repository.HotelRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -17,22 +16,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class HotelServiceImpl implements HotelService {
     private final HotelRepository hotelRepository;
-    private final AmenityRepository amenityRepository;
+    private final AmenityService amenityService;
     private final ModelMapper modelMapper;
 
     @Autowired
     public HotelServiceImpl(HotelRepository hotelRepository,
-                            AmenityRepository amenityRepository,
+                            AmenityService amenityService,
                             ModelMapper modelMapper
                             ) {
         this.hotelRepository = hotelRepository;
-        this.amenityRepository = amenityRepository;
+        this.amenityService = amenityService;
         this.modelMapper = modelMapper;
     }
 
@@ -58,7 +56,7 @@ public class HotelServiceImpl implements HotelService {
         Hotel hotel = modelMapper.map(hotelCreateDtoRequest, Hotel.class);
         try {
             List<Amenity> processedAmenities = hotel.getAmenities().stream()
-                    .map(this::findOrCreateAmenity)
+                    .map(amenityService::findOrCreateAmenity)
                     .toList();
             hotel.setAmenities(processedAmenities);
             Hotel createdHotel = hotelRepository.save(hotel);
@@ -76,24 +74,8 @@ public class HotelServiceImpl implements HotelService {
                 log.error("Hotel with id {} not found", id);
                 return new HotelNotFoundException(id);
             });
-        hotelRepository.save(createHotelWithNewAmenities(amenities, hotel));
+        Hotel hotelWithNewAmenities = amenityService.addAmenitiesToHotel(hotel, amenities);
+        hotelRepository.save(hotelWithNewAmenities);
     }
 
-    private Hotel createHotelWithNewAmenities(List<String> amenities, Hotel hotel) {
-        Set<String> currentAmenities =  hotel.getAmenities()
-                .stream()
-                .map(Amenity::getName)
-                .collect(Collectors.toSet());
-        amenities.stream()
-                .filter(currentAmenities::add)
-                .map(str -> modelMapper.map(str, Amenity.class))
-                .map(this::findOrCreateAmenity)
-                .forEach(amenity -> hotel.getAmenities().add(amenity));
-        return hotel;
-    }
-
-    private Amenity findOrCreateAmenity(Amenity amenity) {
-        return amenityRepository.findByName(amenity.getName())
-                .orElseGet(() -> amenityRepository.save(amenity));
-    }
 }

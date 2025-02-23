@@ -14,7 +14,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
@@ -27,7 +26,6 @@ class HotelSearchServiceImplTest {
     private HotelRepository hotelRepository;
     @Mock
     private ModelMapper modelMapper;
-
     @InjectMocks
     private HotelSearchServiceImpl hotelSearchService;
 
@@ -40,8 +38,8 @@ class HotelSearchServiceImplTest {
         hotel.setName("test");
         hotelDtoResponse = new HotelDtoResponse();
         hotelDtoResponse.setName("test");
-
     }
+
     @Test
     public void searchTest() {
         when(hotelRepository.findAll(any(Specification.class))).thenReturn(List.of(hotel));
