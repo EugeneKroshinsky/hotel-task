@@ -12,5 +12,4 @@ public interface HotelService {
     HotelDetailsDtoResponse getHotelById(Long id);
     HotelDtoResponse createHotel(HotelCreateDtoRequest hotelCreateDtoRequest);
     void addAmenities(Long id, List<String> amenities);
-
 }
