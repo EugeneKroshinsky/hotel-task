@@ -4,6 +4,8 @@
 
 [План выполнения](#plan)
 
+[Инструкции к запуску](#instructions)
+
 
 
 ### Задание ###
@@ -61,5 +63,25 @@ H2
    - HotelDetailsDtoResponse
    - HotelDtoResponse
 5) Реализация DTO [feature/dto-implementation]()
-6) Создание класс Repository [feature/repository-creation]()
+   - Добавление ModelMapper
+   - Добавление Hibernate Validation
+6) Создание классов Repository [feature/repository-creation]()
+7) Обработка всех исключений
+   - Создание класса @RestControllerAdvice
+8) Тестирование
+   - Модульное тестирование сервисов
+   - Модульное тестирование контроллеров
+   - Модульное тестирование репозиториев
 
+<a id="instructions"></a>
+### Инструкции по запуску ###
+
+Запуск приложения через консоль:
+```
+    mvn spring-boot:run
+```
+
+Запуск тестов через консоль:
+```
+    mvn test
+```

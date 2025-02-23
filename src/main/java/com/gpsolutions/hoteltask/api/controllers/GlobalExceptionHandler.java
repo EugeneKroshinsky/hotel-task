@@ -5,58 +5,63 @@ import com.gpsolutions.hoteltask.exceptions.HotelNotFoundException;
 import com.gpsolutions.hoteltask.exceptions.InvalidFilterParameterException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handleIllegalArgument(IllegalArgumentException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(ex.getMessage());
+    public ProblemDetail  handleIllegalArgument(IllegalArgumentException ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+        problemDetail.setTitle("IllegalArgumentException");
+        problemDetail.setDetail(ex.getMessage());
+        return problemDetail;
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ProblemDetail> handleIllegalArgument(MethodArgumentNotValidException ex) {
+    public ProblemDetail handleIllegalArgument(MethodArgumentNotValidException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors()
-                .forEach(error -> {
-                    String fieldName = ((FieldError)error).getField();
-                    String errorMessage  = error.getDefaultMessage();
-                    errors.put(fieldName, errorMessage);
-                });
+        problemDetail.setTitle("MethodArgumentNotValidException");
+        Map<String,String> errors = createErrorMap(ex);
         problemDetail.setProperty("errors", errors);
-        return ResponseEntity
-                .badRequest()
-                .body(problemDetail);
+        return problemDetail;
     }
 
     @ExceptionHandler(HotelNotFoundException.class)
-    public ResponseEntity<String> handleHotelNotFound(HotelNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(ex.getMessage());
+    public ProblemDetail handleHotelNotFound(HotelNotFoundException ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+        problemDetail.setTitle("HotelNotFoundException");
+        problemDetail.setDetail(ex.getMessage());
+        return problemDetail;
     }
 
     @ExceptionHandler(HotelCreationException.class)
-    public ResponseEntity<ProblemDetail> handleIllegalArgument(HotelCreationException ex) {
+    public ProblemDetail handleIllegalArgument(HotelCreationException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
-        problemDetail.setProperty("message", ex.getMessage());
-        problemDetail.setProperty("exception", ex.getCause().getMessage());
-        return ResponseEntity
-                .badRequest()
-                .body(problemDetail);
+        problemDetail.setTitle("HotelCreationException");
+        problemDetail.setDetail(ex.getCause().getMessage());
+        return problemDetail;
     }
 
     @ExceptionHandler(InvalidFilterParameterException.class)
-    public ResponseEntity<String> handleIllegalParameter(InvalidFilterParameterException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    public ProblemDetail handleIllegalParameter(InvalidFilterParameterException ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+        problemDetail.setTitle("InvalidFilterParameterException");
+            problemDetail.setDetail(ex.getMessage());
+        return problemDetail;
+    }
+
+    private Map<String,String> createErrorMap(MethodArgumentNotValidException ex) {
+        return ex.getBindingResult().getAllErrors().stream()
+                .collect(Collectors.toMap(
+                        error -> ((FieldError)error).getField(),
+                        error -> error.getDefaultMessage()
+                ));
     }
 }

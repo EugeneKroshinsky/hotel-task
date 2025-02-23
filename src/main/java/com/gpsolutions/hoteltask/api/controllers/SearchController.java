@@ -2,7 +2,6 @@ package com.gpsolutions.hoteltask.api.controllers;
 
 import com.gpsolutions.hoteltask.api.dto.HotelDtoResponse;
 import com.gpsolutions.hoteltask.service.HotelSearchService;
-import com.gpsolutions.hoteltask.service.HotelService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

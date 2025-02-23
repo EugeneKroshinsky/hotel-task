@@ -80,6 +80,7 @@ class AmenityServiceImplTest {
     void addAmenitiesToHotelShouldNullAmenities() {
         hotel.setAmenities(amenities);
         stringAmenities.add("test1");
+
         when(modelMapper.map("test1", Amenity.class)).thenReturn(amenity1);
         when(amenityRepository.findByName("test1")).thenReturn(Optional.empty());
         when(amenityRepository.save(amenity1)).thenReturn(amenity1);
@@ -96,7 +97,9 @@ class AmenityServiceImplTest {
     void addAmenitiesToHotelNullList() {
         amenities.add(amenity1);
         hotel.setAmenities(amenities);
+
         Hotel updatedHotel = amenityService.addAmenitiesToHotel(hotel, stringAmenities);
+
         assertEquals(1, updatedHotel.getAmenities().size());
         assertTrue(
                 updatedHotel.getAmenities().stream()
