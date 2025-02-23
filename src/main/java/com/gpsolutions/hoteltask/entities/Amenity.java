@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 import java.util.StringJoiner;
 
 @Setter
@@ -21,7 +23,8 @@ public class Amenity {
     @Column(unique = true, nullable = false)
     private String name;
 
-
+    @ManyToMany(mappedBy = "amenities", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Hotel> hotels;
 
     @Override
     public String toString() {

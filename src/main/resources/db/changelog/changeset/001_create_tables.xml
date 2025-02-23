@@ -11,10 +11,11 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
 
             <column name="description" type="TEXT"/>
+
             <column name="brand" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -59,10 +60,10 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="phone" type="VARCHAR(20)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="email" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
     </changeSet>

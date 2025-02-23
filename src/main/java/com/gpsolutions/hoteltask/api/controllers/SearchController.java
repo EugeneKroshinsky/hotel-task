@@ -1,12 +1,12 @@
 package com.gpsolutions.hoteltask.api.controllers;
 
 import com.gpsolutions.hoteltask.api.dto.HotelDtoResponse;
+import com.gpsolutions.hoteltask.exceptions.InvalidFilterParameterException;
 import com.gpsolutions.hoteltask.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -22,8 +22,9 @@ public class SearchController {
     }
 
     @GetMapping
-    public List<HotelDtoResponse>  searchHotels(@RequestParam Map<String, String> params) {
-        return hotelService.search(params);
+    public List<HotelDtoResponse>  searchHotels(@RequestParam(required = false) Map<String, String> params,
+                                                @RequestParam(required = false) List<String> amenities) {
+        return hotelService.search(params, amenities);
     }
 
 }

@@ -3,16 +3,22 @@ package com.gpsolutions.hoteltask.api.controllers;
 import com.gpsolutions.hoteltask.api.dto.HotelCreateDtoRequest;
 import com.gpsolutions.hoteltask.api.dto.HotelDetailsDtoResponse;
 import com.gpsolutions.hoteltask.api.dto.HotelDtoResponse;
+import com.gpsolutions.hoteltask.exceptions.HotelCreationException;
+import com.gpsolutions.hoteltask.exceptions.HotelNotFoundException;
 import com.gpsolutions.hoteltask.service.HotelService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -36,12 +42,7 @@ public class HotelController {
     }
 
     @PostMapping
-    public ResponseEntity<HotelDtoResponse> createHotel(@RequestBody @Valid HotelCreateDtoRequest request,
-                                                        BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            log.error("HotelCreateDtoRequest is not valid");
-            throw new RuntimeException(); //TODO: реализовать кастомное исключение
-        }
+    public ResponseEntity<HotelDtoResponse> createHotel(@RequestBody @Valid HotelCreateDtoRequest request) {
         HotelDtoResponse response = hotelService.createHotel(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

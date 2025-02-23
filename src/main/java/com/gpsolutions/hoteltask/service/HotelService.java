@@ -13,5 +13,5 @@ public interface HotelService {
     void addAmenities(Long id, List<String> amenities);
     HotelDtoResponse createHotel(HotelCreateDtoRequest hotelCreateDtoRequest);
     Map<String, Long> getHistogram(String param);
-    List<HotelDtoResponse> search(Map<String, String> params);
+    List<HotelDtoResponse> search(Map<String, String> params, List<String> amenities);
 }

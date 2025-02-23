@@ -47,7 +47,7 @@
     <changeSet id="10" author="Eugene Kroshinsky">
         <insert tableName="hotels">
             <column name="name" value="DoubleTree by Hilton Minsk"/>
-            <column name="description" value="Luxury hotel with stunning views of Minsk."/>
+            <column name="description" value="The DoubleTree by Hilton Hotel Minsk offers 193 luxurious rooms in the Belorussian capital and stunning views of Minsk city from the hotel's 20th floor ..."/>
             <column name="brand" value="Hilton"/>
             <column name="address_id" value="1"/>
             <column name="contacts_id" value="1"/>
@@ -71,13 +71,28 @@
             <column name="name" value="Free WiFi"/>
         </insert>
         <insert tableName="amenities">
+            <column name="name" value="Non-smoking rooms"/>
+        </insert>
+        <insert tableName="amenities">
+            <column name="name" value="Concierge"/>
+        </insert>
+        <insert tableName="amenities">
+            <column name="name" value="On-site restaurant"/>
+        </insert>
+        <insert tableName="amenities">
             <column name="name" value="Fitness center"/>
         </insert>
         <insert tableName="amenities">
-            <column name="name" value="Non smoking rooms"/>
+            <column name="name" value="Pet-friendly rooms"/>
         </insert>
         <insert tableName="amenities">
             <column name="name" value="Room service"/>
+        </insert>
+        <insert tableName="amenities">
+            <column name="name" value="Business center"/>
+        </insert>
+        <insert tableName="amenities">
+            <column name="name" value="Meeting rooms"/>
         </insert>
     </changeSet>
 
@@ -89,6 +104,38 @@
         <insert tableName="hotel_amenities">
             <column name="hotel_id" value="1"/>
             <column name="amenity_id" value="2"/>
+        </insert>
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" value="1"/>
+            <column name="amenity_id" value="3"/>
+        </insert>
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" value="1"/>
+            <column name="amenity_id" value="4"/>
+        </insert>
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" value="1"/>
+            <column name="amenity_id" value="5"/>
+        </insert>
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" value="1"/>
+            <column name="amenity_id" value="6"/>
+        </insert>
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" value="1"/>
+            <column name="amenity_id" value="7"/>
+        </insert>
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" value="1"/>
+            <column name="amenity_id" value="8"/>
+        </insert>
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" value="1"/>
+            <column name="amenity_id" value="9"/>
+        </insert>
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" value="1"/>
+            <column name="amenity_id" value="10"/>
         </insert>
         <insert tableName="hotel_amenities">
             <column name="hotel_id" value="2"/>
