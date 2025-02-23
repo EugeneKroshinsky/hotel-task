@@ -3,8 +3,6 @@ package com.gpsolutions.hoteltask.api.dto;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
-import java.sql.Time;
-
 @Getter
 @Setter
 @AllArgsConstructor

@@ -9,12 +9,10 @@ import com.gpsolutions.hoteltask.exceptions.HotelCreationException;
 import com.gpsolutions.hoteltask.exceptions.HotelNotFoundException;
 import com.gpsolutions.hoteltask.repository.AmenityRepository;
 import com.gpsolutions.hoteltask.repository.HotelRepository;
-import com.gpsolutions.hoteltask.specification.HotelSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -81,29 +79,6 @@ public class HotelServiceImpl implements HotelService {
         hotelRepository.save(createHotelWithNewAmenities(amenities, hotel));
     }
 
-    @Override
-    public List<HotelDtoResponse> search(Map<String, String> params, List<String> amenities) {
-        Specification<Hotel> specification = HotelSpecification.filterByParams(params, amenities);
-        return hotelRepository.findAll(specification).stream()
-                .map(hotel -> modelMapper.map(hotel, HotelDtoResponse.class))
-                .toList();
-    }
-
-    @Override
-    public Map<String, Long> getHistogram(String param) {
-        return  switch (param) {
-            case "city" -> createMap(hotelRepository.countHotelsByCity());
-            case "country" -> createMap(hotelRepository.countHotelsByCountry());
-            case "brand" -> createMap(hotelRepository.countHotelsByBrand());
-            case "amenities" -> createMap(hotelRepository.countHotelByAmenity());
-            default -> {
-                log.error("Param \"" + param + "\" isn't match");
-                throw new IllegalArgumentException("Param \"" + param + "\" isn't match");
-            }
-        };
-    }
-
-
     private Hotel createHotelWithNewAmenities(List<String> amenities, Hotel hotel) {
         Set<String> currentAmenities =  hotel.getAmenities()
                 .stream()
@@ -115,15 +90,6 @@ public class HotelServiceImpl implements HotelService {
                 .map(this::findOrCreateAmenity)
                 .forEach(amenity -> hotel.getAmenities().add(amenity));
         return hotel;
-    }
-
-
-    private Map<String, Long> createMap(List<Object[]> result) {
-        return result.stream()
-                .collect(Collectors.toMap(
-                        row -> row[0] != null ? row[0].toString() : "Unknown",
-                        row -> row[1] instanceof Number ? ((Number) row[1]).longValue() : 0L
-                ));
     }
 
     private Amenity findOrCreateAmenity(Amenity amenity) {
