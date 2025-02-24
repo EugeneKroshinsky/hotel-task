@@ -6,6 +6,8 @@
 
 [Инструкции по запуску](#instructions)
 
+[swagger-documentation.json](https://github.com/EugeneKroshinsky/hotel-task/blob/swagger-documentation.json)
+
 
 
 ### Задание ###
@@ -72,7 +74,7 @@ H2
    - Модульное тестирование сервисов
    - Модульное тестирование контроллеров
    - Модульное тестирование репозиториев
-
+9) Добавить документацию
 <a id="instructions"></a>
 ### Инструкции по запуску ###
 
