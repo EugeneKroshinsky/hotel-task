@@ -6,7 +6,7 @@
 
 [Инструкции по запуску](#instructions)
 
-[swagger-documentation.json](https://github.com/EugeneKroshinsky/hotel-task/blob/swagger-documentation.json)
+[swagger-documentation.json](https://github.com/EugeneKroshinsky/hotel-task/blob/feature/swagger/swagger-documentation.json)
 
 
 
