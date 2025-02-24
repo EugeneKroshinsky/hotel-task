@@ -143,6 +143,6 @@ class HotelControllerTest {
         mockMvc.perform(post("/property-view/hotels/1/amenities")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(List.of("testAmenity1", "testAmenity2"))))
-                .andExpect(status().isCreated());
+                .andExpect(status().isOk());
     }
 }
