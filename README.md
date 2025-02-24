@@ -70,11 +70,12 @@ H2
 6) Создание классов Repository [feature/repository-creation](https://github.com/EugeneKroshinsky/hotel-task/tree/feature/repository-creation)
 7) Обработка всех исключений
    - Создание класса @RestControllerAdvice
-8) Тестирование  [feature/tests](https://github.com/EugeneKroshinsky/hotel-task/tree/feature/tests)
+8) Тестирование через Postman
+9) Написание модульных тестов  [feature/tests](https://github.com/EugeneKroshinsky/hotel-task/tree/feature/tests)
    - Модульное тестирование сервисов
    - Модульное тестирование контроллеров
    - Модульное тестирование репозиториев
-9) Добавление документации Swagger
+10) Добавление документации Swagger [feature/swagger](https://github.com/EugeneKroshinsky/hotel-task/tree/feature/swagger)
 <a id="instructions"></a>
 ### Инструкции по запуску ###
 
@@ -88,12 +89,28 @@ H2
     mvn test
 ```
 
-Api для получения документации swagger:
+Url для получения документации swagger:
 ```
     http://localhost:8092/v3/api-docs
 ```
 
-Api для получения UI документации swagger:
+Url для получения UI документации swagger:
 ```
    http://localhost:8092/swagger-ui/index.html
+```
+
+Все остальные Url:
+```
+   Получить все отели:
+      GET http://localhost:8092/property-view/hotels 
+   Получить отель по id:
+      GET http://localhost:8092/property-view/hotels/{id}
+   Получить поиск по фильтрам:
+      GET http://localhost:8092/property-view/search
+   Получить данные о количестве отелей по параметрам:
+      GET http://localhost:8092/property-view/histogram/{param}
+   Создать отель:
+      POST http://localhost:8092/property-view/hotels
+   Добавить amenities:
+      POST http://localhost:8092/property-view/hotels/{id}/amenities
 ```
