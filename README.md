@@ -8,7 +8,7 @@
 
 [swagger-documentation.json](https://github.com/EugeneKroshinsky/hotel-task/blob/feature/swagger/swagger-documentation.json)
 
-
+Стек: Spring Boot 3.4.2, Java 17, h2 database, Lombok, Liquibase, Hibernate Validator, Mockito, OpenApi, Model mapper
 
 ### Задание ###
 Необходимо разработать RESTful API приложение для работы с отелями со следующими методами:
