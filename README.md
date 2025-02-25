@@ -8,7 +8,7 @@
 
 [swagger-documentation.json](https://github.com/EugeneKroshinsky/hotel-task/blob/feature/swagger/swagger-documentation.json)
 
-Стек: Spring Boot 3.4.2, Java 17, h2 database, Lombok, Liquibase, Hibernate Validator, Mockito, OpenApi, Model mapper
+Стек: Spring Boot 3.4.2, Java 17, Spring JPA, Maven, H2 database, Lombok, Liquibase, Hibernate Validator, Mockito, OpenApi, Model mapper
 
 ### Задание ###
 Необходимо разработать RESTful API приложение для работы с отелями со следующими методами:
@@ -105,7 +105,7 @@ Url для получения UI документации swagger:
       GET http://localhost:8092/property-view/hotels 
    Получить отель по id:
       GET http://localhost:8092/property-view/hotels/{id}
-   Получить поиск по фильтрам:
+   Поиск по фильтрам:
       GET http://localhost:8092/property-view/search
    Получить данные о количестве отелей по параметрам:
       GET http://localhost:8092/property-view/histogram/{param}
